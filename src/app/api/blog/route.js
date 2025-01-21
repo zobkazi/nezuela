@@ -1,5 +1,5 @@
 import dbConnect from '@/utils/dbConnect';
-import Blog from '@/models/Blog';
+import Blog from '@/modules/blog/blog.schema';
 
 export async function POST(req, res) {
     await dbConnect();
