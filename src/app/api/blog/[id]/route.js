@@ -2,11 +2,16 @@ import { NextResponse } from 'next/server';
 import connectDB from '@/libs/connectDB';
 import Blog from '@/modules/blog/blog.schema';
 
+export async function generateStaticParams() {
+  await connectDB();
+  const blogs = await Blog.find({}, '_id');
+  return blogs.map(blog => ({ params: { id: blog._id.toString() } }));
+}
+
 export async function GET(req, { params }) {
   try {
     await connectDB();
 
-    // Ensure params are awaited properly
     const { id } = params;
 
     if (!id) {
