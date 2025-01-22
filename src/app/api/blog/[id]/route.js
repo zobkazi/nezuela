@@ -1,9 +1,10 @@
+// /src/app/api/blog/[id]/route.js
 import connectDB from '@/libs/connectDB';
 import Blog from '@/modules/blog/blog.schema';
 
 // generateStaticParams function to generate static paths
 export async function generateStaticParams() {
-  const blogs = await Blog.find({});  // অথবা আপনার ডাটাবেস থেকে ব্লগ আইডিগুলি নিয়ে আসুন
+  const blogs = await Blog.find({});  // আপনার ডাটাবেস থেকে ব্লগ আইডিগুলি নিয়ে আসুন
 
   // Generate static params for each blog entry
   return blogs.map((blog) => ({
