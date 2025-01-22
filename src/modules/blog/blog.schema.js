@@ -15,7 +15,7 @@ const blogSchema = new Schema({
         required: [true, 'Content is required'],
         trim: true,
         minlength: [5, 'Content must be at least 5 characters'],
-        maxlength: [255, 'Content must be at most 255 characters '],
+        maxlength: [2558098, 'Content must be at most 2558098 characters '],
 
     },
     author: {

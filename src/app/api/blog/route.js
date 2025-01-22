@@ -3,15 +3,11 @@ import { NextResponse } from 'next/server';
 import connectDB from '@/libs/connectDB';
 import Blog from '@/modules/blog/blog.schema';
 
-
-
-
-
 // Create a new blog
 export async function POST(req) {
   try {
     // Connect to database
-    connectDB();
+    await connectDB();
     const body = await req.json();
     const { title, content, author, category, tags, isPublished, featuredImage } = body;
 
@@ -37,11 +33,26 @@ export async function POST(req) {
   }
 }
 
-// Get all blogs
-export async function GET() {
+// Get all blogs with pagination
+export async function GET(req) {
   try {
-    const blogs = await Blog.find();
-    return NextResponse.json({ blogs }, { status: 200 });
+    await connectDB();
+    const { searchParams } = new URL(req.url);
+    const page = parseInt(searchParams.get('page')) || 1;
+    const limit = parseInt(searchParams.get('limit')) || 5;
+    const skip = (page - 1) * limit;
+
+    const totalBlogs = await Blog.countDocuments();
+    const blogs = await Blog.find().skip(skip).limit(limit);
+
+    return NextResponse.json({
+      blogs,
+      pagination: {
+        currentPage: page,
+        totalPages: Math.ceil(totalBlogs / limit),
+        totalDocs: totalBlogs,
+      },
+    }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch blogs', details: error.message }, { status: 500 });
   }
