@@ -37,7 +37,8 @@ export async function POST(req) {
 export async function GET(req) {
   try {
     await connectDB();
-    const { searchParams } = new URL(req.url);
+    const url = new URL(req.url);
+    const searchParams = url.searchParams;
     const page = parseInt(searchParams.get('page')) || 1;
     const limit = parseInt(searchParams.get('limit')) || 5;
     const skip = (page - 1) * limit;
@@ -57,3 +58,4 @@ export async function GET(req) {
     return NextResponse.json({ error: 'Failed to fetch blogs', details: error.message }, { status: 500 });
   }
 }
+
