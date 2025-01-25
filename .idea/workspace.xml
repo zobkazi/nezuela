@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="e0c2970a-382f-49a6-8953-92641f43a610" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/env.example" beforeDir="false" afterPath="$PROJECT_DIR$/env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/blogs/[slug]/page.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/blogs/layout.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/blogs/page.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(home)/blog/BlogList.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(home)/blog/[id]/BlogDetail.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(home)/blog/[id]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(home)/blog/[id]/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(home)/blog/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(home)/blog/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(home)/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(home)/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/blog/[id]/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/blog/[id]/route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/blog/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/blog/route.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,9 +22,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2s18qckPKfzzeriG0NaFKbTmZER" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -30,11 +36,23 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
+      </map>
+    </option>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -51,6 +69,8 @@
       <option name="presentableId" value="Default" />
       <updated>1737611912082</updated>
       <workItem from="1737611913776" duration="32000" />
+      <workItem from="1737718408343" duration="149000" />
+      <workItem from="1737718562042" duration="7607000" />
     </task>
     <servers />
   </component>

@@ -1,13 +1,13 @@
-// /src/app/api/blog/[id]/route.js
 import { NextResponse } from 'next/server';
 import connectDB from '@/libs/connectDB';
 import Blog from '@/modules/blog/blog.schema';
 
-// Get a single blog by ID
+// Get a specific blog by ID
 export async function GET(req, { params }) {
   try {
     await connectDB();
     const { id } = params;
+
     const blog = await Blog.findById(id);
 
     if (!blog) {
@@ -20,13 +20,19 @@ export async function GET(req, { params }) {
   }
 }
 
-// Update a blog by ID
+// Update a specific blog by ID
 export async function PUT(req, { params }) {
   try {
     await connectDB();
     const { id } = params;
     const body = await req.json();
-    const updatedBlog = await Blog.findByIdAndUpdate(id, body, { new: true });
+    const { title, content, author, category, tags, isPublished, featuredImage } = body;
+
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      id,
+      { title, content, author, category, tags, isPublished, featuredImage },
+      { new: true, runValidators: true }
+    );
 
     if (!updatedBlog) {
       return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
@@ -38,11 +44,12 @@ export async function PUT(req, { params }) {
   }
 }
 
-// Delete a blog by ID
+// Delete a specific blog by ID
 export async function DELETE(req, { params }) {
   try {
     await connectDB();
     const { id } = params;
+
     const deletedBlog = await Blog.findByIdAndDelete(id);
 
     if (!deletedBlog) {

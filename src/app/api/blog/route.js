@@ -1,4 +1,4 @@
-// /app/api/blog/route.js
+// /app/api/blog/[id]/route.js
 import { NextResponse } from 'next/server';
 import connectDB from '@/libs/connectDB';
 import Blog from '@/modules/blog/blog.schema';
@@ -25,6 +25,12 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Invalid category' }, { status: 400 });
     }
 
+    // blog already exists
+    const existingBlog = await Blog.findOne({ title });
+    if (existingBlog) {
+      return NextResponse.json({ error: 'Blog already exists' }, { status: 400 });
+    }
+
     const blog = new Blog({ title, content, author, category, tags, isPublished, featuredImage });
     await blog.save();
     return NextResponse.json({ message: 'Blog created successfully', blog }, { status: 201 });
@@ -37,8 +43,7 @@ export async function POST(req) {
 export async function GET(req) {
   try {
     await connectDB();
-    const url = new URL(req.url);
-    const searchParams = url.searchParams;
+    const { searchParams } = new URL(req.url);
     const page = parseInt(searchParams.get('page')) || 1;
     const limit = parseInt(searchParams.get('limit')) || 5;
     const skip = (page - 1) * limit;
@@ -58,4 +63,3 @@ export async function GET(req) {
     return NextResponse.json({ error: 'Failed to fetch blogs', details: error.message }, { status: 500 });
   }
 }
-

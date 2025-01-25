@@ -1,12 +1,16 @@
-import React from 'react';
-import BlogDetail from './BlogDetail';
+// import { Metadata, ResolvingMetadata } from "next";
+// import { notFound } from "next/navigation";
 
-const BlogDetailPage = async ({ params }) => {
-  // Fetch data on the server
-  const res = await fetch(`http://localhost:3000/api/blog/${params.id}`, { cache: 'no-store' });
-  const blog = await res.json();
+// export async function generateStaticParams() {
+// return 
+// }
 
-  return <BlogDetail blog={blog} />;
-};
+import React from 'react'
 
-export default BlogDetailPage;
+const page = () => {
+  return (
+    <div>page</div>
+  )
+}
+
+export default page
