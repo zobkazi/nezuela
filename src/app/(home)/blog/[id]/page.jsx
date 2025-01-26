@@ -1,30 +1,39 @@
-// Next.js will invalidate the cache when a
-// request comes in, at most once every 60 seconds.
-export const revalidate = 60
+import { notFound } from 'next/navigation'
  
-// We'll prerender only the params from `generateStaticParams` at build time.
-// If a request comes in for a path that hasn't been generated,
-// Next.js will server-render the page on-demand.
-export const dynamicParams = true // or false, to 404 on unknown paths
+async function getPost(id) {
+  const res = await fetch(`https://api.vercel.app/blog/${id}`)
+  const post = await res.json()
+  if (!post) notFound()
+  return post
+}
  
 export async function generateStaticParams() {
   const posts = await fetch('https://api.vercel.app/blog').then((res) =>
     res.json()
   )
+ 
   return posts.map((post) => ({
     id: String(post.id),
   }))
 }
  
+export async function generateMetadata({ params }) {
+  const { id } = await params
+  const post = await getPost(id)
+ 
+  return {
+    title: post.title,
+  }
+}
+ 
 export default async function Page({ params }) {
   const { id } = await params
-  const post = await fetch(`https://api.vercel.app/blog/${id}`).then((res) =>
-    res.json()
-  )
+  const post = await getPost(id)
+ 
   return (
-    <main>
+    <article>
       <h1>{post.title}</h1>
       <p>{post.content}</p>
-    </main>
+    </article>
   )
 }
