@@ -1,25 +1,24 @@
-async function getAllBlogs(title) {
- const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blog/${title}`, {
-    method: 'GET',
-    next: {
-      revalidate: 5000,
-    }
-  });
+// src/app/blog/[title]/page.js (or page.jsx)
+
+
+// Fetch blog data from API or DB
+async function getBlogData(title) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blog/${title}`);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch blog with title: ${title}`);
+  }
   return res.json();
 }
 
-
+// The dynamic page component
 export default async function PostId({ params }) {
-  // Await the params if necessary (Next.js 15's behavior)
-  const { title } = await params;
+  const { title } = params;
 
-  const data = await getAllBlogs(title);  // Correct use of title after extracting it
+  const { blog } = await getBlogData(title);
 
-  if (data.error) {
-    return <div>Error: {data.error}</div>;
+  if (!blog) {
+    return <div>Blog not found</div>;
   }
-
-  const { blog } = data;
 
   return (
     <div>
@@ -27,4 +26,16 @@ export default async function PostId({ params }) {
       <p>{blog.content}</p>
     </div>
   );
+}
+
+// Generate static paths for all possible blog titles
+export async function generateStaticParams() {
+  // Fetch all possible blog titles (You can fetch this from your database or API)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blog/title`);
+  const { titles } = await res.json();
+
+  // Return an array of params for each blog title
+  return titles.map(title => ({
+    title,
+  }));
 }
