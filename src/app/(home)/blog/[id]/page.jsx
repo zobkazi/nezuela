@@ -3,7 +3,8 @@
 import { notFound } from 'next/navigation'
 
 async function getPost(id) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blog/${id}`)
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://zobkazi.github.io/nezuela'
+  const res = await fetch(`${apiUrl}/api/blog/${id}`)
   const data = await res.json()
 
   if (!data.success || !data.data) {
