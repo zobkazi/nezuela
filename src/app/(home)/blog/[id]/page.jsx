@@ -14,7 +14,8 @@ async function getPost(id) {
 }
 
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blog`)
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://zobkazi.github.io/nezuela'
+  const res = await fetch(`${apiUrl}/api/blog`)
   const posts = await res.json()
 
   return posts.data.map((post) => ({

@@ -12,7 +12,8 @@ export default function Page() {
 
   const fetchPosts = async (page = 1) => {
     setLoading(true);
-    const res = await fetch(`/api/blog?page=${page}&limit=5`);
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://zobkazi.github.io/nezuela'
+      const res = await fetch(`${apiUrl}/api/blog/${page}&limit=5`)
     const data = await res.json();
 
     if (data.success) {
