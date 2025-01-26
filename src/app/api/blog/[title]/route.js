@@ -6,9 +6,9 @@ import Blog from '@/modules/blog/blog.schema';
 export async function GET(req, { params }) {
   try {
     await connectDB();
-    const { id } = params;
+    const { title } = params;
 
-    const blog = await Blog.findById(id);
+    const blog = await Blog.findOne({ title });
 
     if (!blog) {
       return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
