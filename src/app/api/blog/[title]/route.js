@@ -6,7 +6,7 @@ import Blog from '@/modules/blog/blog.schema';
 export async function GET(req, { params }) {
   try {
     await connectDB();
-    const { title } = params;
+    const { title } = await params;
 
     const blog = await Blog.findOne({ title });
 
