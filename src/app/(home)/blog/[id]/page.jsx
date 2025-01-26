@@ -34,6 +34,7 @@ export default async function Page({ params }) {
     <article>
       <h1>{post.title}</h1>
       <p>{post.content}</p>
+      <p>{post.author	}</p>
     </article>
   )
 }
