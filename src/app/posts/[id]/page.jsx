@@ -1,7 +1,8 @@
-
-import getAllPosts from "@/libs/getAllBlogs";
-import getPost from "@/libs/getBlog";
-
+import Comments from "@/app/components/Comments";
+import getAllPosts from "@/libs/getAllPosts";
+import getPost from "@/libs/getPost";
+import getPostComments from "@/libs/getPostComment";
+import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
     const { id } = params;
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }) {
 export default async function PostPage({ params }) {
     const { id } = params;
     const postPromise = getPost(id);
-  
+    const commentsPromise = getPostComments(id);
 
     // const [post, comments] = await Promise.all([postPromise, commentsPromise]);
     const post = await postPromise;
@@ -26,7 +27,9 @@ export default async function PostPage({ params }) {
             <h2 className="text-blue-500">{post.title}</h2>
             <p className="mt-3">{post.body}</p>
             <hr />
-            <h3 className="mt-6">Comments</h3>
+            <Suspense fallback="<h1>Loading comments...</h1>">
+                <Comments promise={commentsPromise} />
+            </Suspense>
         </div>
     );
 }
