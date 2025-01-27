@@ -1,5 +1,5 @@
 export default async function Page() {
-  const apiEndpoint = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+  const apiEndpoint = process.env.NEXT_PUBLIC_API_URL
   const res = await fetch(`${apiEndpoint}/api/news`, {
     headers: {
       'Content-Type': 'application/json',
