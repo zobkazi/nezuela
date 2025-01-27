@@ -1,28 +1,20 @@
+import getAllPosts from "@/libs/getAllBlogs";
 import Link from "next/link";
 
-export default function Blogs() {
-    const blogs = [
-        {
-            id: 1,
-            title: "Blog 1",
-            description: "Blog 1 description",
-        },
-        {
-            id: 2,
-            title: "Blog 2",
-            description: "Blog 2 description",
-        },
-    ];
+export default async function Posts() {
+    const posts = await getAllPosts();
 
     return (
-        <main className="mt-10">
-            <ul>
-                {blogs.map((blog) => (
-                    <li className="mb-5" key={blog.id}>
-                        <Link href={`/blogs/${blog.id}`}>{blog.title}</Link>
+        <div className="mt-6">
+            <h1>All posts</h1>
+
+            <ul className="mt-6">
+                {posts.map((post) => (
+                    <li key={post.id}>
+                        <Link href={`/blog/${post.id}`}>{post.title}</Link>
                     </li>
                 ))}
             </ul>
-        </main>
+        </div>
     );
 }
