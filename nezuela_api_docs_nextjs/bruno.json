@@ -1,9 +1,0 @@
-{
-  "version": "1",
-  "name": "nezuela_api_docs_nextjs",
-  "type": "collection",
-  "ignore": [
-    "node_modules",
-    ".git"
-  ]
-}
