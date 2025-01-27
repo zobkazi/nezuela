@@ -1,48 +1,38 @@
-import connectMongo from "@/libs/dbConnect";
-import Blog from "@/models/blog/Blog";
+import getAllPosts from "@/libs/getAllBlogs";
+import getPost from "@/libs/getBlog";
 
-// Fetch blog post by ID
-async function getBlogPost(id) {
-    await connectMongo();
-    const post = await Blog.findById(id);
-    return post;
-}
-
-// Fetch all blog posts for static paths
-async function getAllBlogPosts() {
-    await connectMongo();
-    const posts = await Blog.find({});
-    return posts;
-}
-
-// Generate static parameters
-export async function generateStaticParams() {
-    const posts = await getAllBlogPosts();
-    
-    return posts.map((post) => ({
-        id: post._id.toString(),
-    }));
-}
-
-// Page component
-export default async function BlogPost({ params }) {
+export async function generateMetadata({ params }) {
     const { id } = params;
-    const post = await getBlogPost(id);
+    const post = await getPost(id);
 
-    if (!post) {
-        return <div>Post not found</div>;
-    }
+    return {
+        title: post.title,
+        description: post.body,
+    };
+}
+
+export default async function PostPage({ params }) {
+    const { id } = params;
+    const postPromise = getPost(id);
+    // const commentsPromise = getComments(id);
+
+    // const [post, comments] = await Promise.all([postPromise, commentsPromise]);
+    const post = await postPromise;
 
     return (
-        <article className="max-w-2xl mx-auto p-4">
-            <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
-            <p className="text-gray-600 mb-2">By {post.author}</p>
-            <time className="text-gray-500 mb-4 block">
-                {new Date(post.createdAt).toLocaleDateString()}
-            </time>
-            <div className="prose max-w-none">
-                {post.content}
-            </div>
-        </article>
+        <div className="mt-6">
+            <h2 className="text-blue-500">{post.title}</h2>
+            <p className="mt-3">{post.body}</p>
+            <hr />
+            <h3 className="mt-6">Comments</h3>
+        </div>
     );
+}
+
+export async function generateStaticParams() {
+    const posts = await getAllPosts();
+
+    return posts.map((post) => ({
+        id: post.id.toString(),
+    }));
 }

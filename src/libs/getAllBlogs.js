@@ -1,6 +1,6 @@
 export default async function getAllPosts() {
     const result = await fetch(
-        "http://localhost:3000/api/blog",
+        "https://jsonplaceholder.typicode.com/posts?_limit=10",
         {
             next: {
                 revalidate: 10,

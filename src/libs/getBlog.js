@@ -1,6 +1,6 @@
-export default async function getPost(_id) {
+export default async function getPost(id) {
     const result = await fetch(
-        `http://localhost:3000/api/blog${_id}`,
+        `https://jsonplaceholder.typicode.com/posts/${id}`
     );
 
     return result.json();
