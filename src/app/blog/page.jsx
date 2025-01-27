@@ -10,8 +10,8 @@ export default async function Posts() {
 
             <ul className="mt-6">
                 {posts.map((post) => (
-                    <li key={post.id}>
-                        <Link href={`/blog/${post.id}`}>{post.title}</Link>
+                    <li key={post._id}>
+                        <Link href={`/blog/${post._id}`}>{post.title}</Link>
                     </li>
                 ))}
             </ul>
