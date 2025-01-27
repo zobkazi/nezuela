@@ -1,5 +1,7 @@
+
 import getAllPosts from "@/libs/getAllBlogs";
 import getPost from "@/libs/getBlog";
+
 
 export async function generateMetadata({ params }) {
     const { id } = params;
@@ -14,7 +16,7 @@ export async function generateMetadata({ params }) {
 export default async function PostPage({ params }) {
     const { id } = params;
     const postPromise = getPost(id);
-    // const commentsPromise = getComments(id);
+  
 
     // const [post, comments] = await Promise.all([postPromise, commentsPromise]);
     const post = await postPromise;
